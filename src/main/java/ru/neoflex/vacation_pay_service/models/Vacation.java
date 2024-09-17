@@ -13,7 +13,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 @RequiredArgsConstructor
-public class Vocation {
+public class Vacation {
     @NonNull
     private double averageSalary;
     @NonNull
