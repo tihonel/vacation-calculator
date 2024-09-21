@@ -4,7 +4,7 @@
 
 
 
-Выходные и праздничные дни учитываются при расчёте среднедневной зарплаты за прошедший год.
+Выходные и праздничные дни учитываются при расчёте среднедневной зарплаты за прошедший год, если указана дата начала отпуска.
 
 ## Функции
 
@@ -15,7 +15,7 @@
 ## Vacation Pay Calculator
 The Vacation Pay Calculator is a Spring Boot application that calculates vacation pay based on the average salary, number of vacation days, and the start date of the vacation. The application also takes into account public holidays using [AbstractAPI](https://www.abstractapi.com/). A free API key is used, which can be changed in application.properties.
 
-Weekends and public holidays are taken into account when calculating the average daily salary for the past year.
+Weekends and holidays are taken into account when calculating the average daily salary for the past year, if the start date of the vacation is indicated.
 
 ## Features
 Calculate vacation pay based on average salary and number of vacation days.
