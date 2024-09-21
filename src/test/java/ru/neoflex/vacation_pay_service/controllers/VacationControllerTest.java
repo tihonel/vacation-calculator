@@ -16,6 +16,7 @@ import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import ru.neoflex.vacation_pay_service.helpers.VacationHelper;
@@ -130,5 +131,37 @@ public class VacationControllerTest {
                 .andExpect(content().string("Failed to calculate vacation pay"));
 
         verify(vacationService, times(1)).calculateVacationPay(vacation);
+    }
+
+    @Test
+    void testCalculateVacationPay_withInvalidAverageSalary_shouldBeBadRequest() throws Exception {
+        // given
+        BigDecimal averageSalary = new BigDecimal("0.0").setScale(2, RoundingMode.HALF_UP);
+        int vacationDays = 1;
+
+        // when
+        ResultActions actual = mockMvc.perform(get("/vacation/calculate")
+                .param("averageSalary", averageSalary.toString())
+                .param("vacationDays", String.valueOf(vacationDays))
+                .contentType(MediaType.APPLICATION_JSON));
+
+        // then
+        actual.andExpect(status().isBadRequest());
+    }
+
+    @Test
+    void testCalculateVacationPay_withInvalidVacationDays_shouldBeBadRequest() throws Exception {
+        // given
+        BigDecimal averageSalary = new BigDecimal("1000.88").setScale(2, RoundingMode.HALF_UP);
+        int vacationDays = 0;
+
+        // when
+        ResultActions actual = mockMvc.perform(get("/vacation/calculate")
+                .param("averageSalary", averageSalary.toString())
+                .param("vacationDays", String.valueOf(vacationDays))
+                .contentType(MediaType.APPLICATION_JSON));
+
+        // then
+        actual.andExpect(status().isBadRequest());
     }
 }
