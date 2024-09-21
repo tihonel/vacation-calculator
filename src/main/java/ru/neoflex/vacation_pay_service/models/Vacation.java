@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Getter
@@ -15,7 +16,7 @@ import java.time.LocalDate;
 @RequiredArgsConstructor
 public class Vacation {
     @NonNull
-    private double averageSalary;
+    private BigDecimal averageSalary;
     @NonNull
     private int vacationDays;
     private LocalDate startDate;
